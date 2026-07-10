@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小米昆仑增程 SUV 家族 · 完整信息页</title>
+<style>
+  :root {
+    --accent: #ff6900;
+    --accent-soft: rgba(255, 105, 0, 0.12);
+    --bg: #0d0f13;
+    --bg-card: #16191f;
+    --bg-card-hover: #1c2028;
+    --border: #262b35;
+    --text: #e8eaef;
+    --text-dim: #9aa3b2;
+    --text-faint: #667080;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 96px 0 72px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,105,0,0.18), transparent),
+      linear-gradient(180deg, #12151b 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #fff 30%, #ffb27a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .sub {
+    margin-top: 16px;
+    font-size: 20px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .hero .stats {
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .hero .stat b {
+    display: block;
+    font-size: 34px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .hero .stat span { font-size: 13px; color: var(--text-faint); letter-spacing: 1px; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 6px; height: 24px;
+    background: var(--accent);
+    border-radius: 3px;
+    margin-right: 12px;
+    vertical-align: -3px;
+  }
+  .section-desc { color: var(--text-dim); margin-bottom: 36px; font-size: 15px; }
+
+  /* ---------- Official photos ---------- */
+  .hero-img {
+    max-width: 900px;
+    margin: 48px auto -24px;
+    padding: 0 24px;
+  }
+  .hero-img img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 64px rgba(0,0,0,.55);
+  }
+  .hero-img .cap { margin-top: 10px; font-size: 12px; color: var(--text-faint); }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .gallery figure {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .gallery img { width: 100%; display: block; }
+  .gallery figcaption {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .gallery figcaption b { color: var(--text); }
+
+  /* ---------- Options / wheels ---------- */
+  .opt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .opt-item {
+    background: #f5f5f5;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .opt-item img { width: 100%; display: block; }
+  .opt-item .opt-cap {
+    background: var(--bg-card);
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+  }
+  .opt-item .opt-cap b { display: block; color: var(--text); font-size: 15px; margin-bottom: 4px; }
+  .opt-item .opt-cap .chips { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .opt-item .opt-cap .chip {
+    font-size: 11.5px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .opt-item .opt-cap .chip.blue { background: rgba(64,158,255,.12); color: #6db3ff; }
+  @media (max-width: 800px) { .opt-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Model cards ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: transform .2s, border-color .2s, background .2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+  }
+  .card .tag {
+    align-self: flex-start;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .card .tag.special { background: rgba(64,158,255,.12); color: #6db3ff; }
+  .card .cover {
+    width: calc(100% + 48px);
+    margin: -28px -24px 18px;
+    border-radius: 16px 16px 0 0;
+    display: block;
+  }
+  .card h3 { font-size: 19px; margin-bottom: 4px; }
+  .card .model-code {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-family: "SF Mono", Menlo, monospace;
+    margin-bottom: 18px;
+  }
+  .card ul { list-style: none; flex: 1; }
+  .card li {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    padding: 6px 0;
+    border-bottom: 1px dashed #232833;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card li:last-child { border-bottom: none; }
+  .card li b { color: var(--text); font-weight: 600; text-align: right; }
+  .card .price {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  .card .price b {
+    display: block;
+    font-size: 24px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ---------- Powertrain ---------- */
+  .power-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .power-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .power-item .num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .power-item .num small { font-size: 15px; font-weight: 500; color: var(--text-dim); margin-left: 2px; }
+  .power-item .label { margin-top: 6px; font-size: 14px; color: var(--text-dim); }
+  .power-item .foot { margin-top: 4px; font-size: 12px; color: var(--text-faint); }
+
+  /* ---------- Spec table ---------- */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 760px; }
+  thead th {
+    background: #1a1e26;
+    color: var(--text);
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  thead th:first-child { position: sticky; left: 0; background: #1a1e26; }
+  tbody td {
+    padding: 12px 16px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td:first-child {
+    color: var(--text);
+    font-weight: 600;
+    position: sticky;
+    left: 0;
+    background: var(--bg-card);
+  }
+  tbody tr:hover td { background: var(--bg-card-hover); }
+  tbody tr:hover td:first-child { background: var(--bg-card-hover); }
+  .hl { color: var(--accent) !important; font-weight: 600; }
+
+  /* ---------- Camper feature ---------- */
+  .camper {
+    background: linear-gradient(135deg, #16191f 0%, #1a2030 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .camper h3 { font-size: 24px; margin-bottom: 12px; }
+  .camper h3 span { color: #6db3ff; }
+  .camper p { color: var(--text-dim); font-size: 14.5px; margin-bottom: 20px; }
+  .camper .feats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .camper .feat {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+  }
+  .camper .feat b { display: block; color: var(--text); margin-bottom: 2px; }
+  .camper .feat span { color: var(--text-faint); font-size: 12.5px; }
+  .camper .visual {
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-faint);
+  }
+  .camper .visual .art {
+    font-size: 88px;
+    line-height: 1;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 8px 24px rgba(109,179,255,.25));
+  }
+
+  /* ---------- Price forecast ---------- */
+  .price-bars { display: flex; flex-direction: column; gap: 18px; }
+  .pbar { display: grid; grid-template-columns: 200px 1fr 150px; gap: 16px; align-items: center; font-size: 14px; }
+  .pbar .name { color: var(--text); font-weight: 600; }
+  .pbar .name small { display: block; color: var(--text-faint); font-weight: 400; font-size: 12px; }
+  .pbar .track { height: 30px; background: #1a1e26; border-radius: 8px; position: relative; overflow: hidden; }
+  .pbar .fill {
+    position: absolute; top: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(255,105,0,.35), var(--accent));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12.5px; font-weight: 600; color: #fff;
+  }
+  .pbar .range { color: var(--accent); font-weight: 700; text-align: right; }
+  .price-note {
+    margin-top: 28px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255,105,0,.35);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .price-note b { color: var(--accent); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 56px;
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+  footer p + p { margin-top: 8px; }
+
+  @media (max-width: 800px) {
+    .wrap { padding: 0 16px; }
+    section { padding: 44px 0; }
+    h2 { font-size: 22px; }
+    .section-desc { font-size: 14px; margin-bottom: 24px; }
+
+    .hero { padding: 56px 0 44px; }
+    .hero h1 { font-size: 30px; letter-spacing: 2px; }
+    .hero .sub { font-size: 15px; padding: 0 8px; }
+    .hero .badge { font-size: 12px; letter-spacing: 1px; }
+    .hero .stats { gap: 20px 28px; margin-top: 32px; }
+    .hero .stat b { font-size: 24px; }
+    .hero .stat span { font-size: 12px; }
+    .hero-img { margin: 32px auto -16px; padding: 0 16px; }
+    .hero-img img { border-radius: 14px; }
+
+    .cards { grid-template-columns: 1fr; }
+    .card { padding: 22px 20px; }
+    .card .cover { width: calc(100% + 40px); margin: -22px -20px 16px; }
+
+    .power-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .power-item { padding: 18px 12px; }
+    .power-item .num { font-size: 24px; }
+    .power-item .label { font-size: 12.5px; }
+    .power-item .foot { font-size: 11px; }
+
+    .gallery { grid-template-columns: 1fr; }
+    .opt-grid { grid-template-columns: 1fr; }
+    .opt-item .opt-cap { padding: 14px 16px; }
+
+    .camper { grid-template-columns: 1fr; padding: 26px 20px; gap: 24px; }
+    .camper h3 { font-size: 20px; }
+    .camper .visual .art { font-size: 64px; }
+
+    .pbar { grid-template-columns: 1fr; gap: 6px; }
+    .pbar .range { text-align: left; }
+    .pbar .fill { font-size: 11px; }
+    .price-note { font-size: 13px; padding: 14px 16px; }
+
+    table { font-size: 12.5px; min-width: 680px; }
+    thead th, tbody td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= Hero ================= -->
+<div class="hero">
+  <div class="wrap">
+    <div class="badge">工信部第 409 批新车公示 · 目录序号 217</div>
+    <h1>澎程 SKYNOMAD 增程 SUV 家族</h1>
+    <p class="sub">小米全新子品牌 · N70 / N70 Max / N90 Max · 覆盖家用到露营</p>
+    <div class="stats">
+      <div class="stat"><b>4</b><span>公示车型</span></div>
+      <div class="stat"><b>1.5L</b><span>东安 M15DRE 增程器</span></div>
+      <div class="stat"><b>210+100<small>kW</small></b><span>双电机峰值功率</span></div>
+      <div class="stat"><b>190<small>km/h</small></b><span>最高车速</span></div>
+    </div>
+    <div class="hero-img">
+      <img src="kunlun-imgs/flagship_front.jpg" alt="澎程 N90 Max 申报图（前 45°）">
+      <div class="cap">澎程 N90 Max 长轴旗舰 · 工信部申报图</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 车型矩阵 ================= -->
+<section>
+  <div class="wrap">
+    <h2>四款车型矩阵</h2>
+    <p class="section-desc">同批公示、同一动力平台，按轴距与用途分为标轴 5 座、长轴 6/7 座与露营特改版。</p>
+    <div class="cards">
+
+      <div class="card">
+        <img class="cover" src="kunlun-imgs/f3_front.jpg" alt="澎程 N70 申报图">
+        <span class="tag">标轴 · 走量版</span>
+        <h3>澎程 N70</h3>
+        <div class="model-code">XMA6500KREEVF3</div>
+        <ul>
+          <li>长宽高 <b>4960×1998×1785</b></li>
+          <li>轴距 <b>2950 mm</b></li>
+          <li>整备质量 <b>2453–2505 kg</b></li>
+          <li>电池 <b>磷酸铁锂 · 欣旺达</b></li>
+          <li>座位 <b>5 座</b></li>
+        </ul>
+        <div class="price">预测起售价<b>21–24 万</b></div>
+      </div>
+
+      <div class="card">
+        <img class="cover" src="kunlun-imgs/a1_front.jpg" alt="澎程 N70 Max 申报图">
+        <span class="tag">标轴 · 高配四驱</span>
+        <h3>澎程 N70 Max</h3>
+        <div class="model-code">XMA6500KREEVA1</div>
+        <ul>
+          <li>长宽高 <b>4960×1998×1765</b></li>
+          <li>轴距 <b>2950 mm</b></li>
+          <li>整备质量 <b>2561 / 2610 kg</b></li>
+          <li>电池 <b>三元锂 · 中创新航</b></li>
+          <li>座位 <b>5 座</b></li>
+        </ul>
+        <div class="price">预测售价<b>25–28 万</b></div>
+      </div>
+
+      <div class="card">
+        <img class="cover" src="kunlun-imgs/flagship_front.jpg" alt="澎程 N90 Max 申报图">
+        <span class="tag">长轴 · 家族旗舰</span>
+        <h3>澎程 N90 Max</h3>
+        <div class="model-code">XMA6530KREEVA1</div>
+        <ul>
+          <li>长宽高 <b>5285×1998×1825</b></li>
+          <li>轴距 <b>3080 mm</b></li>
+          <li>整备质量 <b>2800 kg</b></li>
+          <li>电池 <b>三元锂 · 中创新航</b></li>
+          <li>座位 <b>7 座 / 5 座</b></li>
+        </ul>
+        <div class="price">预测售价<b>30–36 万</b></div>
+      </div>
+
+      <div class="card">
+        <img class="cover" src="kunlun-imgs/camper_front.jpg" alt="澎程 N90 Max 露营版申报图">
+        <span class="tag special">特别版 · 露营</span>
+        <h3>N90 Max 露营版</h3>
+        <div class="model-code">XMA5030XWHKREEVA3</div>
+        <ul>
+          <li>长宽高 <b>5285×1998×1925</b></li>
+          <li>轴距 <b>3080 mm</b></li>
+          <li>整备质量 <b>2840 kg</b></li>
+          <li>电池 <b>三元锂 · 中创新航</b></li>
+          <li>特装 <b>升降车顶 · 床板 · 边柜</b></li>
+        </ul>
+        <div class="price">预测售价<b>38–42 万</b></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= 动力系统 ================= -->
+<section>
+  <div class="wrap">
+    <h2>全系统一的增程动力</h2>
+    <p class="section-desc">四款车型共享同一套插电式增程混合动力系统，允许外接充电，满足国Ⅵ排放（GB18352.6-2016）。</p>
+    <div class="power-grid">
+      <div class="power-item">
+        <div class="num">1499<small>ml</small></div>
+        <div class="label">M15DRE 增程器排量</div>
+        <div class="foot">哈尔滨东安汽车动力</div>
+      </div>
+      <div class="power-item">
+        <div class="num">112<small>kW</small></div>
+        <div class="label">发动机最大净功率</div>
+        <div class="foot">仅发电，不直驱</div>
+      </div>
+      <div class="power-item">
+        <div class="num">210+100<small>kW</small></div>
+        <div class="label">前后双电机峰值功率</div>
+        <div class="foot">四驱版本合计 310kW</div>
+      </div>
+      <div class="power-item">
+        <div class="num">190<small>km/h</small></div>
+        <div class="label">最高车速</div>
+        <div class="foot">全系一致</div>
+      </div>
+      <div class="power-item">
+        <div class="num">0.04<small>L/100km</small></div>
+        <div class="label">WLTC 燃料消耗量</div>
+        <div class="foot">标轴三元版申报值</div>
+      </div>
+      <div class="power-item">
+        <div class="num">ESP10</div>
+        <div class="label">博世车身稳定系统</div>
+        <div class="foot">全系标配 EDR，可选装 ETC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 参数对比 ================= -->
+<section>
+  <div class="wrap">
+    <h2>公示参数对比</h2>
+    <p class="section-desc">数据来源：工信部《道路机动车辆生产企业及产品公告》新产品公示（2026 年）。</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>项目</th>
+            <th>标轴铁锂版<br>6500KREEVF3</th>
+            <th>标轴三元四驱版<br>6500KREEVA1</th>
+            <th>长轴旗舰版<br>6530KREEVA1</th>
+            <th>露营特改版<br>5030XWHKREEVA3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>车辆类型</td><td>多用途乘用车</td><td>多用途乘用车</td><td>多用途乘用车</td><td class="hl">专用乘用车</td></tr>
+          <tr><td>长×宽×高 (mm)</td><td>4960×1998×1785</td><td>4960×1998×1765</td><td>5285×1998×1825</td><td>5285×1998×1925</td></tr>
+          <tr><td>轴距 (mm)</td><td>2950</td><td>2950</td><td class="hl">3080</td><td class="hl">3080</td></tr>
+          <tr><td>轮距 前/后 (mm)</td><td>1722 / 1740</td><td>1722 / 1740</td><td>1718 / 1734</td><td>1718 / 1734</td></tr>
+          <tr><td>整备质量 (kg)</td><td class="hl">2453–2505</td><td>2561 / 2610</td><td>2800</td><td>2840</td></tr>
+          <tr><td>总质量 (kg)</td><td>2892–2944</td><td>3000 / 3049</td><td>3265 / 3361</td><td>3305</td></tr>
+          <tr><td>座位数</td><td>5</td><td>5</td><td class="hl">7 / 5</td><td>5</td></tr>
+          <tr><td>电池类型</td><td class="hl">磷酸铁锂</td><td>三元锂</td><td>三元锂</td><td>三元锂</td></tr>
+          <tr><td>电池供应商</td><td class="hl">南昌欣旺达</td><td>中创新航</td><td>中创新航</td><td>中创新航</td></tr>
+          <tr><td>增程器</td><td colspan="4">东安 M15DRE · 1499ml · 112kW（四款一致）</td></tr>
+          <tr><td>电机峰值功率 (kW)</td><td>210</td><td>210 / 100</td><td>210 / 100</td><td>210 / 100</td></tr>
+          <tr><td>最高车速 (km/h)</td><td>190</td><td>190</td><td>190</td><td>190</td></tr>
+          <tr><td>轮胎规格</td><td>—</td><td>245/55R19 或 255/45R21</td><td>255/45R21 · 265/45R21</td><td>255/45R21 · 265/45R21</td></tr>
+          <tr><td>接近角/离去角</td><td>18°/22°</td><td>17°/21°</td><td>18°/19°</td><td>18°/19°</td></tr>
+          <tr><td>准拖挂车总质量</td><td class="hl">未申报</td><td class="hl">未申报</td><td class="hl">未申报</td><td class="hl">未申报</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 官方申报图 ================= -->
+<section>
+  <div class="wrap">
+    <h2>官方申报图 · 后视</h2>
+    <p class="section-desc">贯穿式尾灯 + SKYNOMAD 尾部字标，尾标分别为「澎程 N70」「澎程 N70 Max」「澎程 N90 Max」。</p>
+    <div class="gallery">
+      <figure>
+        <img src="kunlun-imgs/f3_rear.jpg" alt="澎程 N70 后视图" loading="lazy">
+        <figcaption><b>澎程 N70</b> · XMA6500KREEVF3</figcaption>
+      </figure>
+      <figure>
+        <img src="kunlun-imgs/a1_rear.jpg" alt="澎程 N70 Max 后视图" loading="lazy">
+        <figcaption><b>澎程 N70 Max</b> · XMA6500KREEVA1</figcaption>
+      </figure>
+      <figure>
+        <img src="kunlun-imgs/flagship_rear.jpg" alt="澎程 N90 Max 后视图" loading="lazy">
+        <figcaption><b>澎程 N90 Max</b> · XMA6530KREEVA1</figcaption>
+      </figure>
+      <figure>
+        <img src="kunlun-imgs/camper_rear.jpg" alt="N90 Max 露营版后视图" loading="lazy">
+        <figcaption><b>N90 Max 露营版</b> · XMA5030XWHKREEVA3</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 选装配置 · 轮毂样式 ================= -->
+<section>
+  <div class="wrap">
+    <h2>选装配置 · 轮毂样式</h2>
+    <p class="section-desc">以下为工信部公示的官方选装图：N70 系提供 4 款轮毂样式，N90 系提供 5 款；全系可选电动踏板、多色前饰板/字标/LOGO、车窗框饰条、前后保险杠下饰条等。</p>
+    <div class="opt-grid">
+      <div class="opt-item">
+        <img src="kunlun-imgs/f3_options.jpg" alt="澎程 N70 选装图" loading="lazy">
+        <div class="opt-cap">
+          <b>澎程 N70 选装件</b>
+          尾标「澎程 N70」，选装以外观件为主。
+          <div class="chips">
+            <span class="chip">轮毂 ×4 款</span><span class="chip">电动踏板</span><span class="chip">车身色翼子板盖板</span><span class="chip">不同色前饰板/字标/LOGO</span><span class="chip">车窗框饰条</span><span class="chip">前后杠下饰条</span>
+          </div>
+        </div>
+      </div>
+      <div class="opt-item">
+        <img src="kunlun-imgs/a1_options.jpg" alt="澎程 N70 Max 选装图" loading="lazy">
+        <div class="opt-cap">
+          <b>澎程 N70 Max 选装件</b>
+          尾标「澎程 N70 <span style="color:#e5484d">Max</span>」，选装清单与 N70 一致。
+          <div class="chips">
+            <span class="chip">轮毂 ×4 款</span><span class="chip">电动踏板</span><span class="chip">车身色翼子板盖板</span><span class="chip">不同色前饰板/字标/LOGO</span><span class="chip">车窗框饰条</span><span class="chip">前后杠下饰条</span>
+          </div>
+        </div>
+      </div>
+      <div class="opt-item">
+        <img src="kunlun-imgs/flagship_options.jpg" alt="澎程 N90 Max 选装图" loading="lazy">
+        <div class="opt-cap">
+          <b>澎程 N90 Max 选装件</b>
+          尾标「澎程 N90 <span style="color:#e5484d">Max</span>」，比 N70 系多出 D 柱标牌、门把手样式等选项。
+          <div class="chips">
+            <span class="chip">轮毂 ×5 款</span><span class="chip">D 柱标牌</span><span class="chip">门把手样式</span><span class="chip">电动踏板</span><span class="chip">车身色翼子板盖板</span><span class="chip">不同色前饰板/字标/LOGO</span>
+          </div>
+        </div>
+      </div>
+      <div class="opt-item">
+        <img src="kunlun-imgs/camper_options.jpg" alt="N90 Max 露营版选装图" loading="lazy">
+        <div class="opt-cap">
+          <b>N90 Max 露营版 选装/特装件</b>
+          外观选装同 N90 Max，另有整套露营特装配置。
+          <div class="chips">
+            <span class="chip">轮毂 ×5 款</span><span class="chip blue">升降车顶</span><span class="chip blue">车顶床板</span><span class="chip blue">车内边柜</span><span class="chip blue">可拆卸桌板</span><span class="chip blue">车内投影套装</span><span class="chip blue">侧边帐篷接口</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 露营版专题 ================= -->
+<section>
+  <div class="wrap">
+    <h2>特别关注：官方露营版</h2>
+    <p class="section-desc">四款中最特殊的一台——以长轴车身为基础的"文化生活服务车"，官方申报用途为人员休息、户外团建、移动培训。</p>
+    <div class="camper">
+      <div>
+        <h3>把 SUV 变成<span>移动营地</span></h3>
+        <p>车高较长轴版增加 100mm 达到 1925mm，整备质量 2840kg。这是首款由主机厂直接申报公告的小米"房车化"产品，无需二次改装即可合规上路。</p>
+        <div class="feats">
+          <div class="feat"><b>升降车顶</b><span>驻车展开，站立空间</span></div>
+          <div class="feat"><b>车顶床板</b><span>二层休息区</span></div>
+          <div class="feat"><b>车内边柜</b><span>收纳 / 操作台面</span></div>
+          <div class="feat"><b>可拆卸桌板</b><span>移动办公 / 餐桌</span></div>
+          <div class="feat"><b>车内投影套装</b><span>露营影院</span></div>
+          <div class="feat"><b>侧边帐篷接口</b><span>外扩生活区</span></div>
+        </div>
+      </div>
+      <div class="visual">
+        <div class="art">🏕️</div>
+        专用乘用车 · 5 座<br>
+        原厂公告 · 合规上牌
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 价格预测 ================= -->
+<section>
+  <div class="wrap">
+    <h2>价格预测（非官方）</h2>
+    <p class="section-desc">基于公示配置、竞品行情（理想 L 系 / 问界 M 系）与小米历史定价风格的推测，最终以官方发布为准。</p>
+    <div class="price-bars">
+      <div class="pbar">
+        <div class="name">标轴铁锂版<small>对标理想 L6/L7、问界新 M7</small></div>
+        <div class="track"><div class="fill" style="left:2%; width:22%;">21–24 万</div></div>
+        <div class="range">21–24 万</div>
+      </div>
+      <div class="pbar">
+        <div class="name">标轴三元四驱版<small>对标理想 L7 Max</small></div>
+        <div class="track"><div class="fill" style="left:28%; width:22%;">25–28 万</div></div>
+        <div class="range">25–28 万</div>
+      </div>
+      <div class="pbar">
+        <div class="name">长轴 6/7 座旗舰<small>对标理想 L8/L9、问界 M8</small></div>
+        <div class="track"><div class="fill" style="left:52%; width:28%;">30–36 万</div></div>
+        <div class="range">30–36 万</div>
+      </div>
+      <div class="pbar">
+        <div class="name">露营特改版<small>无直接竞品 · 或限量</small></div>
+        <div class="track"><div class="fill" style="left:80%; width:18%;">38–42 万</div></div>
+        <div class="range">38–42 万</div>
+      </div>
+    </div>
+    <div class="price-note">
+      <b>剧本推演：</b>结合 2026 年 55 万台交付目标上半年完成率仅约 33%、股价贴近 52 周低点的双重压力，走量版更可能采用 <b>"账面 19.98–21.99 万起 + 首销权益 1–2 万"</b> 的组合拳——发布会话术落在"权益后 18 万级"，账面守住 20 万保住利润叙事。
+    </div>
+  </div>
+</section>
+
+<!-- ================= Footer ================= -->
+<footer>
+  <div class="wrap">
+    <p><b>数据来源与声明</b></p>
+    <p>① 技术参数摘自工信部《道路机动车辆生产企业及产品公告》新产品公示网页（2026 年，目录序号 217，企业：小米汽车科技有限公司）。公示阶段信息可能与最终量产版本存在差异。</p>
+    <p>② 四款车型公示信息中"准拖挂车总质量"均为空白，即本批均未申报牵引资质。</p>
+    <p>③ 品牌与车名（澎程 SKYNOMAD · N70 / N70 Max / N90 Max）来自申报图中的车身字标与尾标；全部价格为基于公开报道的推测，不构成任何官方信息；纯电续航与电池容量公示未披露。</p>
+    <p>③-1 页面全部车辆图片（前视 / 后视 / 选装图）均直接取自工信部公示页面原图，未经修改。</p>
+    <p>④ 本页面仅供个人研究参考，非小米官方物料。生成日期：2026-07-10。</p>
+  </div>
+</footer>
+
+</body>
+</html>
