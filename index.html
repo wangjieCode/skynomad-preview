@@ -161,6 +161,69 @@
   .opt-item .opt-cap .chip.blue { background: rgba(64,158,255,.12); color: #6db3ff; }
   @media (max-width: 800px) { .opt-grid { grid-template-columns: 1fr; } }
 
+  /* ---------- Wheel lab ---------- */
+  .wheel-lab {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .wheel-lab .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .wheel-lab .tab {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .wheel-lab .tab:hover { border-color: var(--accent); color: var(--text); }
+  .wheel-lab .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .wheel-lab .stage { display: grid; grid-template-columns: 320px 1fr; gap: 28px; align-items: start; }
+  .wheel-lab .preview {
+    background: #101318;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .wheel-lab .preview img { width: 100%; display: block; }
+  .wheel-lab .preview .pv-label {
+    padding: 12px;
+    font-size: 13.5px;
+    color: var(--text);
+    border-top: 1px solid var(--border);
+  }
+  .wheel-lab .preview .pv-label small { display: block; color: var(--text-faint); font-size: 11.5px; margin-top: 2px; }
+  .wheel-lab .thumbs { display: flex; flex-wrap: wrap; gap: 14px; }
+  .wheel-lab .thumb {
+    width: 104px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #101318;
+    padding: 0;
+    transition: border-color .15s, transform .15s;
+  }
+  .wheel-lab .thumb img { width: 100%; display: block; }
+  .wheel-lab .thumb .t-label { font-size: 11.5px; color: var(--text-dim); padding: 5px 0; display: block; text-align: center; }
+  .wheel-lab .thumb:hover { transform: translateY(-2px); border-color: #566076; }
+  .wheel-lab .thumb.active { border-color: var(--accent); }
+  .wheel-lab .thumb.active .t-label { color: var(--accent); font-weight: 600; }
+  .wheel-lab .lab-note { margin-top: 20px; font-size: 12.5px; color: var(--text-faint); }
+  @media (max-width: 800px) {
+    .wheel-lab { padding: 18px; }
+    .wheel-lab .stage { grid-template-columns: 1fr; gap: 18px; }
+    .wheel-lab .preview { max-width: 320px; margin: 0 auto; }
+    .wheel-lab .thumbs { justify-content: center; }
+    .wheel-lab .thumb { width: 88px; }
+  }
+
   /* ---------- Model cards ---------- */
   .cards {
     display: grid;
@@ -597,6 +660,22 @@
   <div class="wrap">
     <h2>选装配置 · 轮毂样式</h2>
     <p class="section-desc">以下为工信部公示的官方选装图：N70 系提供 4 款轮毂样式，N90 系提供 5 款；全系可选电动踏板、多色前饰板/字标/LOGO、车窗框饰条、前后保险杠下饰条等。</p>
+
+    <!-- 轮毂样式切换器 -->
+    <div class="wheel-lab" id="wheelLab">
+      <div class="tabs" id="wlTabs"></div>
+      <div class="stage">
+        <div class="preview">
+          <img id="wlPreview" src="" alt="轮毂样式预览">
+          <div class="pv-label"><span id="wlName"></span><small id="wlModel"></small></div>
+        </div>
+        <div>
+          <div class="thumbs" id="wlThumbs"></div>
+          <div class="lab-note">点击缩略图切换轮毂样式 · 图片裁自工信部公示选装图。注：公示未提供各轮毂对应的整车效果图，故仅展示轮毂本体切换。</div>
+        </div>
+      </div>
+    </div>
+
     <div class="opt-grid">
       <div class="opt-item">
         <img src="kunlun-imgs/f3_options.jpg" alt="澎程 N70 选装图" loading="lazy">
@@ -714,5 +793,56 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var MODELS = [
+    { key: 'f3',       name: '澎程 N70',        tire: '轮胎规格未公示' },
+    { key: 'a1',       name: '澎程 N70 Max',    tire: '245/55R19 或 255/45R21' },
+    { key: 'flagship', name: '澎程 N90 Max',    tire: '255/45R21 · 265/45R21' },
+    { key: 'camper',   name: 'N90 Max 露营版',  tire: '255/45R21 · 265/45R21' }
+  ];
+  var COUNT = { f3: 4, a1: 4, flagship: 5, camper: 5 };
+  var CN = ['一', '二', '三', '四', '五'];
+
+  var tabsEl = document.getElementById('wlTabs');
+  var thumbsEl = document.getElementById('wlThumbs');
+  var previewEl = document.getElementById('wlPreview');
+  var nameEl = document.getElementById('wlName');
+  var modelEl = document.getElementById('wlModel');
+  var current = { model: 'f3', wheel: 1 };
+
+  function src(model, i) { return 'kunlun-imgs/wheels/' + model + '_w' + i + '.jpg'; }
+
+  function render() {
+    var m = MODELS.filter(function (x) { return x.key === current.model; })[0];
+
+    tabsEl.innerHTML = '';
+    MODELS.forEach(function (x) {
+      var b = document.createElement('button');
+      b.className = 'tab' + (x.key === current.model ? ' active' : '');
+      b.textContent = x.name + '（' + COUNT[x.key] + ' 款）';
+      b.onclick = function () { current = { model: x.key, wheel: 1 }; render(); };
+      tabsEl.appendChild(b);
+    });
+
+    thumbsEl.innerHTML = '';
+    for (var i = 1; i <= COUNT[current.model]; i++) {
+      (function (i) {
+        var t = document.createElement('button');
+        t.className = 'thumb' + (i === current.wheel ? ' active' : '');
+        t.innerHTML = '<img src="' + src(current.model, i) + '" alt="样式' + CN[i - 1] + '"><span class="t-label">样式' + CN[i - 1] + '</span>';
+        t.onclick = function () { current.wheel = i; render(); };
+        thumbsEl.appendChild(t);
+      })(i);
+    }
+
+    previewEl.src = src(current.model, current.wheel);
+    nameEl.textContent = '选装轮辋 · 样式' + CN[current.wheel - 1];
+    modelEl.textContent = m.name + ' · ' + m.tire;
+  }
+
+  render();
+})();
+</script>
 </body>
 </html>
